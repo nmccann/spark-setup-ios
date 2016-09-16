@@ -234,7 +234,13 @@ NSString *const kSparkSetupDidFailDeviceIDKey = @"kSparkSetupDidFailDeviceIDKey"
     
     
     [self dismissViewControllerAnimated:YES completion:^{
-        [self.delegate sparkSetupViewController:self didFinishWithResult:[state integerValue] device:device]; // TODO: add NSError reporting?
+		NSInteger result = [state integerValue];
+        [self.delegate sparkSetupViewController:self didFinishWithResult:result device:device]; // TODO: add NSError reporting?
+		
+        if ([self.delegate respondsToSelector:@selector(sparkSetupViewController:didFinishWithResult:deviceID:)]) {
+        	[self.delegate sparkSetupViewController:self didFinishWithResult:result deviceID:deviceID];
+        }
+		
         if ((!device) && (deviceID)) {
             if ([self.delegate respondsToSelector:@selector(sparkSetupViewController:didNotSucceeedWithDeviceID:)]) {
                 [self.delegate sparkSetupViewController:self didNotSucceeedWithDeviceID:deviceID];

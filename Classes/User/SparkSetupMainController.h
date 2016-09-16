@@ -52,6 +52,16 @@ extern NSString *const kSparkSetupDidFailDeviceIDKey;
 
 @optional
 /**
+ *  Optional delegate method that will be called whenever SparkSetup wizard completes
+ *
+ *  @param controller Instance of main SparkSetup viewController
+ *  @param result     Result of setup completion - can be success, failure or user-cancelled.
+ *  @param deviceID   If available, the Device ID string of the device which was last tried to be setup
+ */
+
+- (void)sparkSetupViewController:(SparkSetupMainController *)controller didFinishWithResult:(SparkSetupMainControllerResult)result deviceID:(NSString *)deviceID;
+
+/**
  *  Optional delegate method that will be called whenever SparkSetup wizard completes unsuccessfully in the following states: (new from 0.5.0)
  *  SuccessDeviceOffline, FailureClaiming, FailutreConfigure, FailureCannotDisconnectFromDevice, LostConnectionToDevice, SuccessNotClaimed
  *
